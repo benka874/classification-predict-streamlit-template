@@ -41,12 +41,12 @@ def main():
 
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
-	st.title("Tweet Classifer")
-	st.subheader("Climate change tweet classification")
+	st.title("Modern Tweet Classifer using AI")
+	st.subheader("Climate change tweet classification according to sentiment")
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "Information"]
+	options = ["Prediction", "Information","Categories","Visuals"]
 	selection = st.sidebar.selectbox("Choose Option", options)
 
 	# Building out the "Information" page
@@ -55,7 +55,7 @@ def main():
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Some information here")
 
-		st.subheader("Raw Twitter data and label")
+		st.subheader("Twitter data and its sentiment")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page
 
