@@ -1,0 +1,9 @@
+[server]
+port = 8501
+
+[theme]
+primaryColor="#388E3C"
+backgroundColor="##86BA3F"
+secondaryBackgroundColor="#D8ECDA"
+textColor="#FFFFFF"
+font="montserrat"
