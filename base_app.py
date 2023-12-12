@@ -50,6 +50,7 @@ from scipy.sparse import hstack  # Used for stacking sparse matrices horizontall
 
 import nltk
 nltk.download('stopwords')
+nltk.download('wordnet')
 # Vectorizer
 news_vectorizer = open("resources/tfidfvect.pkl","rb")
 tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
