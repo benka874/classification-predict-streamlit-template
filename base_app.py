@@ -48,6 +48,8 @@ import unicodedata  # Provides access to the Unicode Character Database for proc
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import hstack  # Used for stacking sparse matrices horizontally.
 
+import nltk
+nltk.download('stopwords')
 # Vectorizer
 news_vectorizer = open("resources/tfidfvect.pkl","rb")
 tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
