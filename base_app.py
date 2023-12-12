@@ -27,6 +27,7 @@ import joblib,os
 
 # Data dependencies
 import pandas as pd
+import numpy as np
 
 # Packages needed for cleaning
 import nltk
@@ -368,7 +369,10 @@ def main():
             df_clean["message"] = df_clean.apply(add_rt_handle, axis=1)
      
             df_clean = df_clean.drop(["retweet_handle", "hashtags", "mentions"], axis=1)
-     
+
+            print("Before vectorization NAN?")
+            print(df_clean.isnull().values.any())
+
             # Fit vectoriser on message data:
             vec_message_train = news_vectorizer.transform(df_clean["message"])
      
@@ -383,19 +387,24 @@ def main():
 
             # Remove tweet ID form both training and test datasets
             df_vectorized_clean = df_vectorized_clean.drop("tweetid", axis=1)
+            print(df_vectorized_clean.isnull().values.any())
+            df_vectorized_clean.fillna(0, inplace=True)
+            print(df_vectorized_clean.isnull().values.any())
+            X_scaled = df_vectorized_clean.to_numpy()
+            #df_vectorized_clean.fillna(0)
 
-            
-            
+        #     scaler = preprocessing.MinMaxScaler()
+        #     # Scale train data
+        #     X_scaled = scaler.fit_transform(df_vectorized_clean)
 
-            scaler = preprocessing.MinMaxScaler()
-            # Scale train data
-            X_scaled = scaler.fit_transform(df_vectorized_clean)
+        #     print(np.any(np.isnan(X_scaled)))
+        #     print(np.all(np.isfinite(X_scaled)))
 
-            
-            
-     
-			# # Transforming user input with vectorizer
-			# vect_text = tweet_cv.transform([tweet_text]).toarray()
+        #     print("Preprocessing done")
+        #     X_scaled = X_scaled.fillna(0)
+        #    # X_scaled.to_csv("./PreprocessedData.csv",sep=',')
+        #     np.savetxt("./PreprocessedData.csv", X_scaled ,delimiter=',')		
+		# 	# vect_text = tweet_cv.transform([tweet_text]).toarray()
 			# Load your .pkl file with the model of your choice + make predictions
 			# Try loading in multiple models to give the user a choice
             predictor = joblib.load(open(os.path.join("./Models/LogisticRegression.pkl"),"rb"))
